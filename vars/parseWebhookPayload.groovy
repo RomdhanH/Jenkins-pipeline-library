@@ -1,7 +1,6 @@
 #!/usr/bin/groovy
 def call(Map config) {
 	node {
-		echo config
 		echo config.payload
 		
 		def payloadObject = new groovy.json.JsonSlurper().parseText(config.payload)
