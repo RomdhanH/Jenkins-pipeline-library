@@ -1,7 +1,6 @@
 #!/usr/bin/groovy
 def call(Map config) {
 	node {
-		echo body
 		echo config
 		echo config.payload
 		
