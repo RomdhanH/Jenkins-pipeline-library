@@ -6,6 +6,10 @@ def call(body) {
     body.delegate = config
     body()
 
+	echo body
+	echo config
+	echo config.payload
+	
 	def payloadObject = new groovy.json.JsonSlurper().parseText(config.payload)
 	
 	env.repoURL = payloadObject.repository.clone_url                            
