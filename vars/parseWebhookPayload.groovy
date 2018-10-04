@@ -1,10 +1,5 @@
 #!/usr/bin/groovy
-def call(body) {
-    // evaluate the body block, and collect configuration into the object
-    def config = [:]
-    body.resolveStrategy = Closure.DELEGATE_FIRST
-    body.delegate = config
-    body()
+def call(Map config) {
 
 	def payloadObject = new groovy.json.JsonSlurper().parseText(config.payload)
 	
