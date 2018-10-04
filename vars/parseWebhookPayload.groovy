@@ -12,7 +12,6 @@ def call(Map config) {
 		def ref = payloadObject.ref
 		env.branch = ref.replace("refs/heads/", "")
 		
-		echo payloadString
 		echo repoName
 		echo branch
 	}
