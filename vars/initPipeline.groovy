@@ -9,7 +9,7 @@ def call() {
 	
 	slack.info message: 'STARTED', appendBuildInfo: true
 		
-	def cred = getCredentials(credentialsId)
+	def cred = getCredentials('nexus_deployment')
 
 	echo cred
 	echo cred.username
