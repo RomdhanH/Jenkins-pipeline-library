@@ -8,9 +8,4 @@ def call() {
 	currentBuild.description = "Building repository: " + repoName + ", branch: " + branch
 	
 	slack.info message: 'STARTED', appendBuildInfo: true
-		
-	def cred = getCredentials('nexus_deployment')
-
-	echo cred.username	
-	echo cred.password.value
 }
