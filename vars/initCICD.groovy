@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 
-def call() {
+def call(Map config) {
 	env.cicdRepo = 'http://gogs-iamp.pathfinder.gov.bc.ca/iamp/cicd.git'
 	checkout([$class: 'GitSCM', 
 		branches: [[name: '*/master']], 
