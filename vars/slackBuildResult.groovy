@@ -1,19 +1,16 @@
 #!/usr/bin/groovy
 
-def call(String buildResult) {
-	
-	def message = appendBuildInfo "Job result: " + buildResult
-																
+def call(String buildResult) {																
 	if ( buildResult == "SUCCESS") {
-		slack.success message, true
+		slack.success message: buildResult, appendBuildInfo: true
 	}
 	else if( buildResult == "FAILURE" || buildResult == "NOT_BUILT" ) { 
-		slack.failure message, true
+		slack.failure message: buildResult, appendBuildInfo: true
 	}
 	else if( buildResult == "UNSTABLE" || buildResult == "ABORTED" ) { 
-		slack.warning message, true
+		slack.warning message: buildResult, appendBuildInfo: true
 	}
 	else {
-		slack.failure message, true
+		slack.failure message: buildResult, appendBuildInfo: true
 	}
 }
