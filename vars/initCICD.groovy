@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
 def call() {
-	env.cicdRepo = http://gogs-iamp.pathfinder.gov.bc.ca/ssaad/cicd.git
+	env.cicdRepo = http://gogs-iamp.pathfinder.gov.bc.ca/iamp/cicd.git
 	checkout([$class: 'GitSCM', 
 		branches: [[name: "*/master"]], 
 		doGenerateSubmoduleConfigurations: false, 
