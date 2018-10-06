@@ -11,7 +11,6 @@ def call() {
 		
 	def cred = getCredentials('nexus_deployment')
 
-	echo cred.toString()
-	echo cred.username
-	echo cred.password
+	echo cred.username	
+	echo cred.password.value
 }
