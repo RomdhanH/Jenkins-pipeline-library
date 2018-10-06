@@ -1,6 +1,7 @@
 #!/usr/bin/groovy
 
-def call(String buildResult) {																
+def call(String buildResult) {
+	echo buildResult																
 	if ( buildResult == "SUCCESS") {
 		slack.success message: buildResult, appendBuildInfo: true
 	}
