@@ -8,8 +8,10 @@ def call() {
 	currentBuild.description = "Building repository: " + repoName + ", branch: " + branch
 	
 	slack.info message: 'STARTED', appendBuildInfo: true
-	
-	withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'nexus_deployment', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+		
+	def cred = getCredentials(credentialsId)
 
-	sh 'echo uname=$USERNAME pwd=$PASSWORD'
+	echo cred
+	echo cred.username
+	echo cred.password
 }
