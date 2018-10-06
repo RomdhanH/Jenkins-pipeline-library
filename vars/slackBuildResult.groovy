@@ -1,17 +1,21 @@
 #!/usr/bin/groovy
 
-def call(String buildResult) {
-	echo buildResult																
-	if ( buildResult == "SUCCESS") {
-		slack.success message: buildResult, appendBuildInfo: true
+def call() {
+	
+	if (!currentBuild.rawBuild.getActions(jenkins.model.InterruptedBuildAction.class).isEmpty()) {
+	   currentBuild.currentResult = "ABORTED"
 	}
-	else if( buildResult == "FAILURE" || buildResult == "NOT_BUILT" ) { 
-		slack.failure message: buildResult, appendBuildInfo: true
+	
+	if ( currentBuild.currentResult == "SUCCESS") {
+		slack.success message: currentBuild.currentResult, appendBuildInfo: true
 	}
-	else if( buildResult == "UNSTABLE" || buildResult == "ABORTED" ) { 
-		slack.warning message: buildResult, appendBuildInfo: true
+	else if( currentBuild.currentResult == "FAILURE" || currentBuild.currentResult == "NOT_BUILT" ) { 
+		slack.failure message: currentBuild.currentResult, appendBuildInfo: true
+	}
+	else if( currentBuild.currentResult == "UNSTABLE" || currentBuild.currentResult == "ABORTED" ) { 
+		slack.warning message: currentBuild.currentResult, appendBuildInfo: true
 	}
 	else {
-		slack.failure message: buildResult, appendBuildInfo: true
+		slack.failure message: currentBuild.currentResult, appendBuildInfo: true
 	}
 }

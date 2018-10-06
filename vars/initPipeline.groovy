@@ -1,7 +1,8 @@
 #!/usr/bin/groovy
 
-def call(Map config) {
-	parseWebhookPayload payload: config.payload
+def call() {
+	def payloadString = "$payload"
+	parseWebhookPayload payload: payloadString
 	
 	currentBuild.displayName = repoName + ":" + branch + " #" + BUILD_NUMBER
 	currentBuild.description = "Building repository: " + repoName + ", branch: " + branch
