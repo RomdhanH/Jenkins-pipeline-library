@@ -1,14 +1,14 @@
 #!/usr/bin/groovy
 
 def call() {
-	env.cicdRepo = http://gogs-iamp.pathfinder.gov.bc.ca/iamp/cicd.git
+	env.cicdRepo = 'http://gogs-iamp.pathfinder.gov.bc.ca/iamp/cicd.git'
 	checkout([$class: 'GitSCM', 
-		branches: [[name: "*/master"]], 
+		branches: [[name: '*/master']], 
 		doGenerateSubmoduleConfigurations: false, 
-		extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "cicd"]], 
+		extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'cicd']], 
 		submoduleCfg: [], 
 		userRemoteConfigs: [[credentialsId: 'jenkins-gogs', url: "${cicdRepo}"]]
 	])
 	
-	env.mvnCmd="mvn -s $WORKSPACE/cicd/maven-settings.xml"
+	env.mvnCmd = "mvn -s $WORKSPACE/cicd/maven-settings.xml"
 }
