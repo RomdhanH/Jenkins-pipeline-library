@@ -6,7 +6,7 @@ def call() {
 	env.sonarProjectName = name + " (Branch: " + branch + ")"
 	
 	withSonarQubeEnv('Sonar') {
-		sh "${mvnCmd} sonar:sonar -DskipTests=true -Dsonar.projectKey=\"$sonarProjectKey\" -Dsonar.projectName=\"$sonarProjectName\""
+		sh "mvn sonar:sonar -DskipTests=true -Dsonar.projectKey=\"$sonarProjectKey\" -Dsonar.projectName=\"$sonarProjectName\""
 	}
 
 	timeout(time: 5, unit: 'MINUTES') {

@@ -7,5 +7,5 @@ def call() {
 	env.version = readMavenPom().getVersion()
 	env.name = readMavenPom().getName()
 						
-	sh "${mvnCmd} clean package -DskipTests=true"
+	sh "mvn clean package -DskipTests=true"
 }

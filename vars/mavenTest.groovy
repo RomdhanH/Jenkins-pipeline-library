@@ -2,5 +2,5 @@
 
 def call() {
 	
-	sh "${mvnCmd} test"
+	sh "mvn test"
 }

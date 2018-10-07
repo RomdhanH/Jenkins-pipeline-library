@@ -2,5 +2,5 @@
 
 def call() {
 	
-	sh "${mvnCmd} dependency-check:check"
+	sh "mvn dependency-check:check -DcentralAnalyzerEnabled=true"
 }
