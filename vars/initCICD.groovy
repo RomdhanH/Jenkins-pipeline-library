@@ -5,5 +5,9 @@ def call() {
 	
 	gitCheckout repoURL: cicdRepoURL, branch: 'master', directory: 'cicd', credentialsId: 'jenkins-gogs'
 	
-	env.mvnCmd = "mvn -s $WORKSPACE/cicd/maven-settings.xml"
+	sh "cp -f $WORKSPACE/cicd/maven-settings.xml /home/jenkins/.m2/settings.xml"
+	
+	env.mvnCmd = "mvn"
+	
+	//env.mvnCmd = "mvn -s $WORKSPACE/cicd/maven-settings.xml"
 }
