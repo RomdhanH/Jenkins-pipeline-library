@@ -8,6 +8,12 @@ def call() {
 	sh "cp -f $WORKSPACE/cicd/maven-settings.xml /home/jenkins/.m2/settings.xml"
 	
 	changedFiles = getChangedFiles()	
+
+	env.imageBuilderTemplateChanged = false
+	env.deploymentTemplateChanged = false
+	env.autoScaleTemplateChanged = false
+	env.devConfigMapChanged = false
+	env.testConfigMapChanged = false
 	
 	if (changedFiles.contains("iamp-image-builder-template.yaml")) { env.imageBuilderTemplateChanged = true }
 	
