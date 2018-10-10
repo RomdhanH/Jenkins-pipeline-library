@@ -7,7 +7,7 @@ def call() {
 	
 	dir('cicd') {
 		env.cicdCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-		env.cicdChangedFile = sh(script: "git show --pretty="" --name-only ${cicdCommit}", returnStdout: true).trim()
+		env.cicdChangedFile = sh(script: "git show --pretty=\"\" --name-only ${cicdCommit}", returnStdout: true).trim()
 		echo cicdCommit
 		echo cicdChangedFile
 	}
