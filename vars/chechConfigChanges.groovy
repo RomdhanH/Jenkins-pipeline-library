@@ -21,7 +21,7 @@ def call() {
 		}
 	}
 	
-	env.devChanged = cmDevChanged || dcDevChanged
+	env.devChanged = cmDevChanged.toBoolean() || dcDevChanged.toBoolean()
 	
-	env.testChanged = cmTestChanged || dcTestChanged
+	env.testChanged = cmTestChanged.toBoolean() || dcTestChanged.toBoolean()
 }
