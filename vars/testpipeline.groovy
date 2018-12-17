@@ -1,5 +1,5 @@
 #!groovy
-#@Library('jenkins-pipeline-library')
+//@Library('jenkins-pipeline-library')
 import hudson.model.*
 def call(Closure body) {
     stage ('Build')
