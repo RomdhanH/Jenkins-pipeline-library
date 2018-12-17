@@ -1,9 +1,11 @@
 #!groovy
-@Library('jenkins-pipeline-library')
+#@Library('jenkins-pipeline-library')
 import hudson.model.*
-stage ('Build')
-node ('maven') {
-    checkout scm
-    initCICD()
-    sh 'mvn clean package'
+def call(Closure body) {
+    stage ('Build')
+        node ('maven') {
+            checkout scm
+            initCICD()
+            sh 'mvn clean package'
+      }
 }
