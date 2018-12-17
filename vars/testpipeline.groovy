@@ -8,4 +8,5 @@ def call(Closure body) {
             initCICD()
             sh 'mvn clean package'
       }
+  body()
 }
