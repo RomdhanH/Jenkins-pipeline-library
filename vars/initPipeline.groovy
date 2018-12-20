@@ -4,8 +4,8 @@ def call() {
 	//def payloadString = "$payload"
 	//parseWebhookPayload payload: payloadString
   
-    env.repoURL = REPO_URL
-    print REPO_URL
+    env.repoURL = "http://gogs-iamp.pathfinder.gov.bc.ca/iamp/multibranch-demo.git";//REPO_URL
+    //print REPO_URL
 	env.repoName = repoURL.tokenize('/').last().replace(".git", "")
 	env.appName = repoName
 	
