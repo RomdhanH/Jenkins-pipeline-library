@@ -1,5 +1,6 @@
 
 import hudson.model.*
+def call(Closure body) {
 pipeline {
 	agent { node { label 'maven' } }
 	stages {
@@ -110,4 +111,5 @@ pipeline {
             slackBuildResult()
         }
     }
+}
 }
