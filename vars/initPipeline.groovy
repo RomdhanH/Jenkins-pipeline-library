@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
 def call() {
-	def payloadString = "$payload"
+	//def payloadString = "$payload"
 	//parseWebhookPayload payload: payloadString
   
     env.repoURL = REPO_URL
