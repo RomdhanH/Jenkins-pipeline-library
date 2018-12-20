@@ -17,8 +17,9 @@ pipeline {
      printPostContent: true
     )
   }
-  stages {
-    stage('Test Generic Trigger') {
+ 
+	stages {
+      	stage('Test Generic Trigger') {
       steps {
         sh """
           echo Variables from shell:
@@ -27,8 +28,6 @@ pipeline {
         """
       }
     }
-  }
-	stages {
 		stage('Init Pipeline') {
             steps {
                 parallel (
