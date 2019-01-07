@@ -1,15 +1,8 @@
 #!/usr/bin/groovy
 
 def call() {
-	//def payloadString = "$payload"
-	//parseWebhookPayload payload: payloadString
-  
-    env.repoURL = "http://gogs-iamp.pathfinder.gov.bc.ca/iamp/multibranch-demo.git";//REPO_URL
-    //print REPO_URL
-	env.repoName = repoURL.tokenize('/').last().replace(".git", "")
-	env.appName = repoName
-	
-	env.branch = BRANCH_NAME
+	def payloadString = "$payload"
+	parseWebhookPayload payload: payloadString
 	
 	currentBuild.displayName = repoName + ":" + branch + " #" + BUILD_NUMBER
 	currentBuild.description = "Building repository: " + repoName + ", branch: " + branch
