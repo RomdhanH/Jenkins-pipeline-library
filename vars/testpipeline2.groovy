@@ -21,7 +21,7 @@ pipeline {
         
         stage ("Checkout & Build") {
             steps {
-                gitCheckout repoURL: repoURL, branch: branch, directory: appName, credentialsId: 'jenkins-gogs'
+                //gitCheckout repoURL: repoURL, branch: branch, directory: appName, credentialsId: 'jenkins-gogs'
                 
                 dir("${appName}") {
                     mavenBuild()
