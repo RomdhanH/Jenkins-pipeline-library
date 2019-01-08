@@ -1,17 +1,14 @@
 #!/usr/bin/groovy
 
-def call() {
-	//def payloadString = "$payload"
-	//parseWebhookPayload payload: payloadString
+def call() {  
   
-    //env.repoURL = payloadObject.repository.clone_url                            
-	env.repoName = readMavenPom().getArtifactId() //repoURL.tokenize('/').last().replace(".git", "")
+  sh "ls -la"
+  
+	env.repoName = readMavenPom().getArtifactId()
+  //sh "mv * ./$repoName"
 	env.appName = repoName
 	
-	env.branch = BRANCH_NAME //ref.replace("refs/heads/", "")
-	
-	//currentBuild.displayName = repoName + ":" + branch + " #" + BUILD_NUMBER
-	//currentBuild.description = "Building repository: " + repoName + ", branch: " + branch
+	env.branch = BRANCH_NAME 
 	
 	slack.info message: 'STARTED', appendBuildInfo: true
 }
