@@ -13,7 +13,9 @@ pipeline {
             steps {
               // print all env vars
               script {
-                   sh 'printenv | sort'
+                  // sh 'printenv | sort'
+                for(e in env){
+                  echo e + " is " + ${e} }
               }
                         initCICD()
                     
