@@ -13,7 +13,7 @@ pipeline {
             steps {
               // print all env vars
               script {
-                  // sh 'printenv | sort'
+                  sh 'printenv'
                 for(e in env){
                   echo e + " is " + ${e} }
               }
