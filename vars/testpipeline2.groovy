@@ -8,17 +8,14 @@ pipeline {
       
 		stage('Init Pipeline') {
             steps {
-             parallel (
-                    "Init Pipeline": {
-                        initPipeline()
-                    },
-                    "Init CICD": {
-                        initCICD()
-                    }
-                )
-                
-            }
-        }
+             	initPipeline()
+                 }
+         stage('Init cicd') {
+            steps {
+             	initCICD()
+            	}
+         }
+ 
         
         stage ("Checkout & Build") {
             steps {
