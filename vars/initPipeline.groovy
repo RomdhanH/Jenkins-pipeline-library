@@ -6,7 +6,7 @@ def call() {
   
 	env.repoName = readMavenPom().getArtifactId()
   sh "mkdir $repoName"
-  sh "mv * ./$repoName"
+  sh "rsync -a * ./$repoName"
   sh "ls -la"
   sh "ls -la $repoName"
 	env.appName = repoName
