@@ -25,7 +25,7 @@ pipeline {
         
         stage ("Checkout & Build") {
             steps {
-                //gitCheckout repoURL: repoURL, branch: branch, directory: appName, credentialsId: 'jenkins-gogs'
+              //gitCheckout repoURL: repoURL, branch: ${{BRANCH_NAME}}, directory: appName, credentialsId: ''
               script {
                 sh "ls -la"
               }
