@@ -12,9 +12,9 @@ pipeline {
 		stage('Init Pipeline') {
             steps {
                
-                    "Init CICD": {
+                    
                         initCICD()
-                    }
+                    
                 
             }
         }
