@@ -6,11 +6,12 @@ pipeline {
 
 	stages {
       
-		stage('Init Pipeline') {
+		stage("Init Pipeline") {
             steps {
              	initPipeline()
                  }
-         stage('Init cicd') {
+        }
+      stage("Init cicd") {
             steps {
              	initCICD()
             	}
