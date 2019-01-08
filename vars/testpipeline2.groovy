@@ -11,14 +11,11 @@ pipeline {
       
 		stage('Init Pipeline') {
             steps {
-                parallel (
-                    "Parse WebHook": {
-                        initPipeline()
-                    },
+               
                     "Init CICD": {
                         initCICD()
                     }
-                )
+                
             }
         }
         
