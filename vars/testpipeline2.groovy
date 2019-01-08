@@ -11,7 +11,7 @@ pipeline {
       
 		stage('Init Pipeline') {
             steps {
-               
+              // print all env vars
                     
                         initCICD()
                     
@@ -22,7 +22,9 @@ pipeline {
         stage ("Checkout & Build") {
             steps {
                 //gitCheckout repoURL: repoURL, branch: branch, directory: appName, credentialsId: 'jenkins-gogs'
-                
+              script {
+                sh "ls -l"
+              }
                 dir("${appName}") {
                     mavenBuild()
                 }
