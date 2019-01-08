@@ -23,7 +23,7 @@ pipeline {
             steps {
                 //gitCheckout repoURL: repoURL, branch: branch, directory: appName, credentialsId: 'jenkins-gogs'
               script {
-                sh "ls -l"
+                sh "ls -la"
               }
                 dir("${appName}") {
                     mavenBuild()
