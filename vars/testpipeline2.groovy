@@ -12,7 +12,9 @@ pipeline {
 		stage('Init Pipeline') {
             steps {
               // print all env vars
-                    
+              script {
+                   sh 'printenv | sort'
+              }
                         initCICD()
                     
                 
