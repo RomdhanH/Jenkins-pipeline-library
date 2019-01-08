@@ -5,6 +5,7 @@ def call() {
   sh "ls -la"
   
 	env.repoName = readMavenPom().getArtifactId()
+  sh "mkdir $repoName"
   sh "mv * ./$repoName"
   sh "ls -la"
   sh "ls -la $repoName"
