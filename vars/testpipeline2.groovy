@@ -1,4 +1,3 @@
-
 import hudson.model.*
 def call(Closure body) {
 pipeline {
@@ -11,24 +10,22 @@ pipeline {
       
 		stage('Init Pipeline') {
             steps {
-              // print all env vars
-              script {
-                  sh 'printenv'
-                for(e in env){
-                  echo e + " is " + ${e} }
-              }
+             parallel (
+                    "Parse WebHook": {
+                        initPipeline()
+                    },
+                    "Init CICD": {
                         initCICD()
-                    
+                    }
+                )
                 
             }
         }
         
         stage ("Checkout & Build") {
             steps {
-              //gitCheckout repoURL: repoURL, branch: ${{BRANCH_NAME}}, directory: appName, credentialsId: ''
-              script {
-                sh "ls -la"
-              }
+              gitCheckout repoURL: repoURL, branch: branch, directory: appName, credentialsId: 'jenkins-gogs'
+              
                 dir("${appName}") {
                     mavenBuild()
                 }
