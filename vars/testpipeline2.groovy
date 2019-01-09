@@ -34,7 +34,13 @@ pipeline {
    			 } // SonarQube taskId is automatically attached to the pipeline context
   			}
        }
-     
+     stage('OWASP Scan') {
+            steps {
+                dir("${appName}") {
+                    mavenOwaspScan()
+                }
+            }
+        }
       
       
     }
