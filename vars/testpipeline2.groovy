@@ -27,6 +27,13 @@ pipeline {
                 }
             }
         }
+      stage('Unit Testing') {
+            steps {
+                dir("${appName}") {
+                    mavenTest()
+                }
+            }
+        }
        stage('SonarQube analysis') {
          steps {
    			 withSonarQubeEnv('Sonar') {
@@ -34,14 +41,14 @@ pipeline {
    			 } // SonarQube taskId is automatically attached to the pipeline context
   			}
        }
-     stage('OWASP Scan') {
+     /*stage('OWASP Scan') {
             steps {
                 dir("${appName}") {
                     mavenOwaspScan()
                 }
             }
         }
-      
+      */
       
     }
 	post('Publish Results') {
