@@ -41,7 +41,7 @@ pipeline {
    			 } // SonarQube taskId is automatically attached to the pipeline context
   			}
        }
-      stage("Quality Gate"){
+     /* stage("Quality Gate"){
         steps {
           timeout(time: 1, unit: 'HOURS') { 
               if (waitForQualityGate().status != 'OK') {
@@ -49,12 +49,22 @@ pipeline {
               }
           }
         }
-      }
+      }*/
       
        stage('Sonar Scan') {
             steps {
                 dir("${appName}") {
                     mavenSonarScan()
+                }
+            }
+        }
+       stage('Push Artifacts') {
+            when {
+                expression { return branch == "develop" }
+            }
+            steps {
+                dir("${appName}") {
+                    mavenDeploy()
                 }
             }
         }
