@@ -29,13 +29,13 @@ pipeline {
         }
       
       
-	
-		post('Publish Results') {
+    }
+	post('Publish Results') {
         always {
             slackBuildResult()
         	  }
     	}
-    }
+    
     
 }
 }
