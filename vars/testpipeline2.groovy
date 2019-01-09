@@ -38,18 +38,10 @@ pipeline {
          steps {
    			 withSonarQubeEnv('Sonar') {
     		  sh 'mvn clean package sonar:sonar'
-   			 } // SonarQube taskId is automatically attached to the pipeline context
+   			 } 
   			}
        }
-     /* stage("Quality Gate"){
-        steps {
-          timeout(time: 1, unit: 'HOURS') { 
-              if (waitForQualityGate().status != 'OK') {
-                  error "Pipeline aborted due to quality gate failure: ${qwaitForQualityGate().status}"
-              }
-          }
-        }
-      }*/
+  
       
        stage('Sonar Scan') {
             steps {
