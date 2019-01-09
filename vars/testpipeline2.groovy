@@ -27,13 +27,19 @@ pipeline {
                 }
             }
         }
-        stage("SonarQube analysis") {
-          steps {
-    		withSonarQubeEnv('Sonar') {
-      		sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-   	     		}
-          }
-        }
+       stage('SonarQube analysis') {
+   			 withSonarQubeEnv('My SonarQube Server') {
+    		  sh 'mvn clean package sonar:sonar'
+   			 } // SonarQube taskId is automatically attached to the pipeline context
+  			}
+      stage("Quality Gate"){
+ 			 timeout(time: 1, unit: 'HOURS') {
+   			 def qg = waitForQualityGate() 
+   			 if (qg.status != 'OK') {
+     		 error "Pipeline aborted due to quality gate failure: ${qg.status}"
+   		 		}
+  			}
+		}
       
       
     }
