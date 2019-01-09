@@ -37,9 +37,11 @@ pipeline {
       
 	
 		post('Publish Results') {
+          steps {
         always {
             slackBuildResult()
         	  }
+          }
     	}
     }
 }
