@@ -20,8 +20,7 @@ pipeline {
         
         stage ("Checkout & Build") {
             steps {
-              //gitCheckout repoURL: repoURL, branch: branch, directory: appName, credentialsId: 'jenkins-gogs'
-              
+         
                 dir("${appName}") {
                     mavenBuild()
                 }
@@ -34,13 +33,6 @@ pipeline {
                 }
             }
         }
-       stage('SonarQube analysis') {
-         steps {
-   			 withSonarQubeEnv('Sonar') {
-    		  sh 'mvn clean package sonar:sonar'
-   			 } 
-  			}
-       }
   
       
        stage('Sonar Scan') {
@@ -51,9 +43,9 @@ pipeline {
             }
         }
        stage('Push Artifacts') {
-            /*when {
+            when {
                 expression { return branch == "develop" }
-            }*/
+            }
             steps {
                 dir("${appName}") {
                     mavenDeploy()
