@@ -59,9 +59,9 @@ pipeline {
             }
         }
        stage('Push Artifacts') {
-            when {
+            /*when {
                 expression { return branch == "develop" }
-            }
+            }*/
             steps {
                 dir("${appName}") {
                     mavenDeploy()
