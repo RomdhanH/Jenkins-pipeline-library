@@ -52,13 +52,13 @@ pipeline {
                 }
             }
         }
-    /* stage('OWASP Scan') {
+     stage('OWASP Scan') {
             steps {
                 dir("${appName}") {
                     mavenOwaspScan()
                 }
             }
-        }*/
+        }
       
       
     }
