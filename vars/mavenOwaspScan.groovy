@@ -2,5 +2,5 @@
 
 def call() {
 	
-	sh "mvn dependency-check:check"
+	sh "mvn -X dependency-check:check"
 }
