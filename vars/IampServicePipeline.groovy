@@ -59,6 +59,14 @@ pipeline {
                 }
             }
         }
+      stage('Check Config Changes') {
+            when {
+                expression { return branch == "develop" }
+            }
+            steps {
+                chechConfigChanges()
+            }
+        }
       stage("Build Image") {
             when {
                 expression { return branch == "develop" }
