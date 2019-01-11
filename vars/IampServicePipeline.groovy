@@ -75,6 +75,14 @@ pipeline {
                 buildDockerImage()
             }
         }
+      stage('Cleanup Dev') {
+			when {
+				expression{ return (branch == "develop" && devChanged.toBoolean()) }
+			}
+			steps {
+				cleanConfig(devProject)
+			}
+        }
    
       
       
