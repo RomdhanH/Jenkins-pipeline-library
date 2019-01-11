@@ -26,7 +26,7 @@ pipeline {
                 }
             }
         }
-      stage('Unit Testing') {
+      stage('Unit & Integration Testing') {
             steps {
                 dir("${appName}") {
                     mavenTest()
@@ -42,6 +42,13 @@ pipeline {
                 }
             }
         }
+       /* stage('OWASP Scan') {
+            steps {
+                dir("${appName}") {
+                    mavenOwaspScan()
+                }
+            }
+        }*/
        stage('Push Artifacts') {
             when {
                 expression { return branch == "develop" }
@@ -52,13 +59,15 @@ pipeline {
                 }
             }
         }
-    /* stage('OWASP Scan') {
-            steps {
-                dir("${appName}") {
-                    mavenOwaspScan()
-                }
+      stage("Build Image") {
+            when {
+                expression { return branch == "develop" }
             }
-        }*/
+            steps {
+                buildDockerImage()
+            }
+        }
+   
       
       
     }
