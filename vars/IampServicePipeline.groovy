@@ -4,13 +4,6 @@ pipeline {
   
 	agent { node { label 'maven' } }
   
- 
-
-  env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?pipeline-?/, '').replaceAll(/-?${env.NAMESPACE}-?\/?/, '')
-  def projectBase = "${env.NAMESPACE}".replaceAll(/-build/, '')
-  env.STAGE1 = "${projectBase}-dev"
-  env.STAGE2 = "${projectBase}-stage"
-  env.STAGE3 = "${projectBase}-prod"
 
 	stages {
       
@@ -91,7 +84,20 @@ pipeline {
 				cleanConfig(devProject)
 			}
         }
-       stage("Deploy to Dev") {
+      
+  stage("Promote To ${devProject}") {
+    sh """
+    oc tag ${env.NAMESPACE}/${appName}:latest ${devProject}/${appName}:latest
+    """
+  }
+
+  stage("Verify Deployment to ${devProject}") {
+
+    openshiftVerifyDeployment(deploymentConfig: "${appName}", namespace: "${devProject}", verifyReplicaCount: true)
+
+    
+  }
+    /*   stage("Deploy to Dev") {
             when {
                 expression { return branch == "develop" }
             }
@@ -100,7 +106,7 @@ pipeline {
 				
 				deployImage project: devProject, version: 'latest', replicas: 1
             }
-        }
+        }*/
    
       
       
