@@ -2,12 +2,15 @@ import hudson.model.*
 def call(Closure body) {
 pipeline {
   
-	agent { node { label 'maven'
-                 def projectBase = "${env.NAMESPACE}".replaceAll(/-build/, '')
+	agent { node { label 'maven' } }
+  
+ 
+
+  env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?pipeline-?/, '').replaceAll(/-?${env.NAMESPACE}-?\/?/, '')
+  def projectBase = "${env.NAMESPACE}".replaceAll(/-build/, '')
   env.STAGE1 = "${projectBase}-dev"
   env.STAGE2 = "${projectBase}-stage"
   env.STAGE3 = "${projectBase}-prod"
-} }
 
 	stages {
       
