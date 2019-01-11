@@ -86,16 +86,19 @@ pipeline {
         }
       
   stage("Promote To ${devProject}") {
+    steps { 
     sh """
     oc tag ${env.NAMESPACE}/${appName}:latest ${devProject}/${appName}:latest
     """
+    }
   }
 
   stage("Verify Deployment to ${devProject}") {
+    steps {
 
     openshiftVerifyDeployment(deploymentConfig: "${appName}", namespace: "${devProject}", verifyReplicaCount: true)
 
-    
+    }
   }
     /*   stage("Deploy to Dev") {
             when {
