@@ -5,7 +5,7 @@ def call() {
   sh "ls -la"
   
 	env.repoName = readMavenPom().getArtifactId()
-  sh "printenv | sort"
+  //sh "printenv | sort"
   sh "mkdir $repoName"
   sh "rsync -a * ./$repoName"
   sh "ls -la"
