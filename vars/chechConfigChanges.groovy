@@ -4,6 +4,8 @@ def call() {
 	env.devProject = 'ag-pssg-is-dev'
 	
 	env.testProject = 'ag-pssg-is-test'
+  
+    env.prodProject = 'ag-pssg-is-tools'
 	
 	dir('cicd') {
 		env.cicdCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
