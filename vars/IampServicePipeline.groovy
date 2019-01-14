@@ -71,7 +71,7 @@ pipeline {
         }
        stage('Determine Deployment color') {
          steps {
-    
+    determinedeploymentcolor()
          }
        }
         
