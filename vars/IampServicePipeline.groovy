@@ -70,19 +70,25 @@ pipeline {
         }
       stage('Determine Deployment color') {
     // Determine current project
+         when {
+                expression { return branch == "develop" }
+            }
+        steps {
     sh "oc get project|grep -v NAME|awk '{print \$1}' >project.txt"
     project = readFile('project.txt').trim()
     sh "oc get route example -n ${project} -o jsonpath='{ .spec.to.name }' > activesvc.txt"
-
+        
     // Determine currently active Service
     active = readFile('activesvc.txt').trim()
     if (active == "example-green") {
       dest = "example-blue"
+    
     }
     echo "Active svc: " + active
     echo "Dest svc:   " + dest
     echo "New color:  " + newcolor
-  }
+        }
+        }
       stage("Build Image") {
             when {
                 expression { return branch == "develop" }
