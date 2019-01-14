@@ -69,11 +69,11 @@ pipeline {
                 chechConfigChanges()
             }
         }
-       stage('Determine Deployment color') {
+ /*     stage('Determine Deployment color') {
          steps {
     determinedeploymentcolor()
          }
-       }
+       }*/
         
       stage("Build Image") {
             when {
@@ -105,6 +105,25 @@ pipeline {
 				deployImage project: devProject, version: 'latest', replicas: 1
             }
         }
+      stage('Cleanup Test') {
+			when {
+				expression{ return (branch == "develop" && testChanged.toBoolean()) }
+			}
+			steps {
+				cleanConfig(testProject)
+			}
+        }
+      stage("Deploy to Test") {
+            when {
+                expression { return branch == "develop" }
+            }
+            steps {
+				sh "oc process -f cicd/iamp-service-config-dev.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
+				
+              deployImage project: testProject, version: ${version}, replicas: 1
+            }
+        }
+      
       
    
       
