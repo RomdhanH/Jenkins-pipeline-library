@@ -103,7 +103,7 @@ pipeline {
             steps {
 				sh "oc process -f cicd/iamp-service-config-dev.yaml -l commit=${cicdCommit} | oc create -f- -n ${devProject} || true"
 				
-              deployImage project: devProject, version: "${version}", replicas: 1
+              deployImage project: devProject, version: "latest", replicas: 1
             }
         }
       
