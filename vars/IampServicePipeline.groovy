@@ -85,6 +85,7 @@ pipeline {
       dest = "example-blue"
     }
          }
+       }
         
       stage("Build Image") {
             when {
