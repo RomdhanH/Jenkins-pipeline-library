@@ -102,7 +102,7 @@ pipeline {
               deployImage project: devProject, version: "latest", replicas: 1
             }
         }
-       stage("Build Image") {
+       stage("Build Image Prod") {
             when {
                 expression { return branch == "develop" }
             }
