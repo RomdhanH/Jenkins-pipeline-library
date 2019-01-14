@@ -118,6 +118,7 @@ pipeline {
                 expression { return branch == "develop" }
             }
             steps {
+              def version    = getVersionFromPom("./pom.xml")
 				sh "oc process -f cicd/iamp-service-config-dev.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
 				
               deployImage project: testProject, version: ${version}, replicas: 1
