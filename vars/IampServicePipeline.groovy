@@ -89,7 +89,7 @@ pipeline {
 				expression{ return (branch == "develop" && devChanged.toBoolean()) }
 			}
 			steps {
-				cleanConfig(devProject)
+				cleanConfig(testProject)
 			}
         }
       
@@ -101,30 +101,12 @@ pipeline {
                 expression { return branch == "develop" }
             }
             steps {
-				sh "oc process -f cicd/iamp-service-config-dev.yaml -l commit=${cicdCommit} | oc create -f- -n ${devProject} || true"
-				
-				deployImage project: devProject, version: 'latest', replicas: 1
-            }
-        }
-      stage('Cleanup Test') {
-			when {
-				expression{ return (branch == "develop" && testChanged.toBoolean()) }
-			}
-			steps {
-				cleanConfig(testProject)
-			}
-        }
-      stage("Deploy to Test") {
-            when {
-                expression { return branch == "develop" }
-            }
-            steps {
-              
 				sh "oc process -f cicd/iamp-service-config-dev.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
 				
               deployImage project: testProject, version: "${version}", replicas: 1
             }
         }
+      
       
       
    
