@@ -142,6 +142,14 @@ pipeline {
 				deployImage project: testProject, version: buildVersion_lowercase, replicas: 1
             }
         }
+      stage("create test route"){
+       when {
+                expression { return branch == "develop" }
+            }
+        steps{
+          sh "oc process -f cicd/iamp-spring-service-prod-route-template.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
+        }
+      }
         
       stage("Switch route") {
        when {
