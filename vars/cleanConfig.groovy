@@ -13,7 +13,7 @@ def call(project) {
 	
 	// Clean deployment configurations
 	if((project == devProject && dcDevChanged.toBoolean()) || (project == testProject && dcTestChanged.toBoolean())){
-		command = "oc process -f cicd/iamp-spring-service-template.yaml -p APP_NAME=${appName} -p API_VERSION=${apiVersion} -p BUILD_VERSION=${version} -p IMAGE_NAME=${appName} -p IMAGE_TAG=latest | oc delete -f- -n " + project + " || true"
+		command = "oc process -f cicd/iamp-spring-service-template.yaml -p APP_NAME=${appName} -p API_VERSION=${apiVersion} -p BUILD_VERSION=${buildVersion_lowercase} -p IMAGE_NAME=${appName} -p IMAGE_TAG=latest | oc delete -f- -n " + project + " || true"
 		
 		sh command
 	}	
