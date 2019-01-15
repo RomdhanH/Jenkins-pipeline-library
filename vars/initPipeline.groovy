@@ -1,7 +1,7 @@
 #!/usr/bin/groovy
 
 def call() {  
-   def content = readFile 'application.properties'
+   def content = readFile 'https://github.com/HoussemRomdhane/Demo_Spring_Jenkins/blob/develop/src/main/resources/application.properties'
 
 Properties properties = new Properties()
 InputStream is = new ByteArrayInputStream(content.getBytes());
