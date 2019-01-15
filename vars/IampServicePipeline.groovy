@@ -147,7 +147,7 @@ pipeline {
                 expression { return branch == "develop" }
             }
         steps{
-          sh "oc process -f cicd/iamp-spring-service-prod-route-template.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
+          sh "oc process -f cicd/iamp-spring-service-prod-route-template.yaml -l commit=${cicdCommit} -l app=${appName}-${apiVersion} | oc create -f- -n ${testProject} || true"
         }
       }
         
