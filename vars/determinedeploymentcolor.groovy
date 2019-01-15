@@ -3,8 +3,8 @@ import jenkins.model.*
 def call() {
 	   
 
-def project  = ""
-  def dest     = "example-green"
+def project  = "testProject"
+  def dest     = "${appName}-${apiVersion}-${version}"
   def active   = ""
 
 
@@ -15,8 +15,8 @@ def project  = ""
 
     // Determine currently active Service
     active = readFile('activesvc.txt').trim()
-    if (active == "example-green") {
-      dest = "example-blue"
+    if (active == "${appName}-${apiVersion}-${version}") {
+      dest = "${appName}-${apiVersion}-${version}"
     }
   
 }
