@@ -14,14 +14,14 @@ def call() {
 
 	openshift.withCluster() {
 		openshift.withProject(devProject) {			
-			env.bcDevChanged = !openshift.selector("bc", [app:"${appName}", commit:"${cicdCommit}"]).exists()
+			env.bcDevChanged = !openshift.selector("bc", [app:"${appName}-${apiVersion}", commit:"${cicdCommit}"]).exists()
 			env.cmDevChanged = !openshift.selector("cm", [commit:"${cicdCommit}"]).exists()
-			env.dcDevChanged = !openshift.selector("dc", [app:"${appName}", commit:"${cicdCommit}"]).exists()
+			env.dcDevChanged = !openshift.selector("dc", [app:"${appName}-${apiVersion}", commit:"${cicdCommit}"]).exists()
 		}
 		
 		openshift.withProject(testProject) {
 			env.cmTestChanged = !openshift.selector("cm", [commit:"${cicdCommit}"]).exists()
-			env.dcTestChanged = !openshift.selector("dc", [app:"${appName}", commit:"${cicdCommit}"]).exists()
+			env.dcTestChanged = !openshift.selector("dc", [app:"${appName}-${apiVersion}", commit:"${cicdCommit}"]).exists()
 		}
 	}
 	
