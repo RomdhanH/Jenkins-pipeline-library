@@ -1,7 +1,8 @@
 #!/usr/bin/groovy
 
 def call() {  
-   def content = readFile 'https://github.com/HoussemRomdhane/Demo_Spring_Jenkins/blob/develop/src/main/resources/application.properties'
+  def content = new ConfigSlurper().parse(new File("https://github.com/HoussemRomdhane/Demo_Spring_Jenkins/blob/develop/src/main/resources/application.properties").toURL())
+   //def content = readFile 'https://github.com/HoussemRomdhane/Demo_Spring_Jenkins/blob/develop/src/main/resources/application.properties'
 
 Properties properties = new Properties()
 InputStream is = new ByteArrayInputStream(content.getBytes());
