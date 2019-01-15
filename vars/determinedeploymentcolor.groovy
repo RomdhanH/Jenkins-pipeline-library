@@ -4,7 +4,7 @@ def call() {
 	   
 
 def project  = "testProject"
-  def dest     = "${appName}-${apiVersion}-${version}"
+  def dest     = "${appName}-${apiVersion}-${buildVersion_lowercase}"
   def active   = ""
 
 
@@ -15,7 +15,7 @@ def project  = "testProject"
 
     // Determine currently active Service
     active = readFile('activesvc.txt').trim()
-    if (active == "${appName}-${apiVersion}-${version}") {
+    if (active == "${appName}-${apiVersion}-${buildVersion_lowercase}") {
       dest = "${appName}-${apiVersion}-${version}"
     }
   
