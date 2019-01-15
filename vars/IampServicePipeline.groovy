@@ -102,7 +102,7 @@ pipeline {
               deployImage project: devProject, version: "latest", replicas: 1
             }
         }
-       stage("Build Image Prod") {
+       /*stage("Build Image Prod") {
             when {
                 expression { return branch == "develop" }
             }
@@ -131,7 +131,7 @@ pipeline {
 				
               deployImage project: testProject, version: "latest", replicas: 1
             }
-        }
+        }*/
       
       
    
