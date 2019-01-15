@@ -97,7 +97,7 @@ pipeline {
                 expression { return branch == "develop" }
             }
             steps {
-				sh "oc process -f cicd/iamp-service-config-dev.yaml -l commit=${cicdCommit} | oc create -f- -n ${devProject} || true"
+				sh "oc process -f cicd/iamp-spring-service-template.yaml -l commit=${cicdCommit} | oc create -f- -n ${devProject} || true"
 				
               deployImage project: devProject, version: "latest", replicas: 1
             }
@@ -127,7 +127,7 @@ pipeline {
                 expression { return branch == "develop" }
             }
             steps {
-				sh "oc process -f cicd/iamp-service-config-dev.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
+				sh "oc process -f cicd/iamp-spring-service-prod-route-template.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
 				
               deployImage project: testProject, version: "latest", replicas: 1
             }
