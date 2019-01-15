@@ -1,5 +1,5 @@
 import hudson.model.*
-  def version    = getVersionFromPom("./pom.xml")
+ // def version    = getVersionFromPom("./pom.xml")
 def call(Closure body) {
 pipeline {
   
@@ -21,7 +21,7 @@ pipeline {
          }
  
         
-        stage ("Checkout & Build") {
+  /*      stage ("Checkout & Build") {
             steps {
          
                 dir("${appName}") {
@@ -52,7 +52,7 @@ pipeline {
                 }
             }
         }*/
-       stage('Push Artifacts') {
+     /*  stage('Push Artifacts') {
             when {
                 expression { return branch == "develop" }
             }
@@ -61,7 +61,7 @@ pipeline {
                     mavenDeploy()
                 }
             }
-        }
+        }*/
       stage('Check Config Changes') {
             when {
                 expression { return branch == "develop" }
