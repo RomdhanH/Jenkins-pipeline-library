@@ -102,15 +102,25 @@ pipeline {
               deployImage project: devProject, version: "latest", replicas: 1
             }
         }
-       /*stage("Build Image Prod") {
-            when {
+      
+       stage ('Promote to Test') {			
+			when {
                 expression { return branch == "develop" }
             }
-            steps {
-                buildDockerImage(testProject)
-            }
-        }
-      stage('Cleanup Prod') {
+			steps {
+				timeout(time:30, unit:'MINUTES') {
+					input message: "Promote to Test?", ok: "Promote"
+				}
+				script{
+					// Tag for Test
+					openshift.withCluster() {
+                      openshift.tag("${devProject}/${appName}-${apiVersion}:latest", "${testProject}/${appName}-${apiVersion}:${buildVersion_lowercase}")
+                    }
+				}
+			}
+		}
+		
+		stage('Cleanup Test') {
 			when {
 				expression{ return (branch == "develop" && testChanged.toBoolean()) }
 			}
@@ -118,20 +128,20 @@ pipeline {
 				cleanConfig(testProject)
 			}
         }
-      
-  
-
-  
-      stage("Deploy to Prod") {
+		
+		stage("Deploy to Test") {
             when {
                 expression { return branch == "develop" }
             }
             steps {
-				sh "oc process -f cicd/iamp-spring-service-prod-route-template.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
+			
+				sh "oc delete hpa -l app=${appName}-${apiVersion} -n ${testProject} || true"
 				
-              deployImage project: testProject, version: "latest", replicas: 1
+				sh "oc process -f cicd/iamp-service-config-test.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
+				
+				deployImage project: testProject, version: buildVersion_lowercase, replicas: 2
             }
-        }*/
+        }
       
       
    
