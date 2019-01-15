@@ -142,6 +142,16 @@ pipeline {
 				deployImage project: testProject, version: buildVersion_lowercase, replicas: 1
             }
         }
+        
+      stage("Switch route") {
+       when {
+                expression { return branch == "develop" }
+            }
+            steps {
+			
+				switchroute()
+            }
+      }
       
       
    
