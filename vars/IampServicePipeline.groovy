@@ -139,7 +139,7 @@ pipeline {
 				
 				sh "oc process -f cicd/iamp-service-config-test.yaml -l commit=${cicdCommit} | oc create -f- -n ${testProject} || true"
 				
-				deployImage project: testProject, version: buildVersion_lowercase, replicas: 2
+				deployImage project: testProject, version: buildVersion_lowercase, replicas: 1
             }
         }
       
