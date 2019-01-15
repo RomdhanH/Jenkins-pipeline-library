@@ -16,6 +16,7 @@ def call() {
 	env.appName = repoName
 	
 	env.branch = BRANCH_NAME 
+  env.apiVersion = "v1"
   
   /*def content = readFile 'hello-world/src/main/resources/application.properties'
 
