@@ -1,15 +1,7 @@
 #!/usr/bin/groovy
 
 def call() {  
-   	def properties = new Properties()
-    //both leading / and no / is fine
-    this.getClass().getResource( '/application.properties' ).withInputStream {
-        properties.load(it)
-    }
-
-    //then: "access the properties"
-    properties."service.version"
-  return proporties 
+   
   
   sh "ls -la"
   
