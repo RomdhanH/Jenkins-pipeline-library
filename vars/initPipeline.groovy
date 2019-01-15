@@ -1,7 +1,16 @@
 #!/usr/bin/groovy
 
 def call() {  
-   
+   def content = readFile 'application.properties'
+
+Properties properties = new Properties()
+InputStream is = new ByteArrayInputStream(content.getBytes());
+properties.load(is)
+
+def runtimeString = 'SERVICE_VERSION'
+echo properties."$service.version"
+SERVICE_VERSION = properties."$service.version"
+echo SERVICE_VERSION
   
   sh "ls -la"
   
