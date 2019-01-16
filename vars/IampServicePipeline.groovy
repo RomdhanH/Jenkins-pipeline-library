@@ -28,7 +28,7 @@ pipeline {
 					input message: "rollback Test?"
 				}
 				script {
-                                            if (ok: "Promote") {
+                                            if (ok == "Promote") {
                                                     echo 'I only execute on the master branch'
                                             } else {
                                                     echo 'I execute elsewhere'
