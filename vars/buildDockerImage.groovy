@@ -8,7 +8,7 @@ def call(project) {
 	sh "cp ${appJar} oc-build/deployments/"
 	
 	// Create build and image streams
-  sh "oc new-build --name=${appName}-${apiVersion} registry.access.redhat.com/jboss-fuse-6/fis-java-openshift:2.0 --binary=true --latest-images=true --labels=app=${appName}-${apiVersion} -n ${project} || true"
+  sh "oc new-build --name=${appName}-${apiVersion} registry.access.redhat.com/jboss-fuse-6/fis-java-openshift:2.0 --binary=true  --labels=app=${appName}-${apiVersion} -n ${project} || true"
 	
 	// Start the build
   sh "oc start-build ${appName}-${apiVersion} --from-dir=oc-build/deployments --wait=true -n ${project} "
