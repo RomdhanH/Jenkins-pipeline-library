@@ -2,7 +2,7 @@
 def call () {
 
 try {
-            input id: 'Deploy', message: 'Is Blue node fine? Proceed with Green node deployment?', ok: 'Deploy!'
+            input id: 'Rollback', message: 'Is the realise fine? Proceed with the rollback?', ok: 'Rollback!'
             sh "ls -la"
         } catch (error) {
            sh "ls -la"
