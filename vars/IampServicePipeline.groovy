@@ -1,5 +1,4 @@
 import hudson.model.*
- // def version    = getVersionFromPom("./pom.xml")
 def call(Closure body) {
 pipeline {
   
