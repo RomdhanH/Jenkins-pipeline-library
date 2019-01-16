@@ -21,7 +21,7 @@ def call() {
 
         env.appName = repoName
         env.branch = BRANCH_NAME 
-        env.apiVersion = "v1"
+        env.apiVersion = "${Var1}"
 
       
 
