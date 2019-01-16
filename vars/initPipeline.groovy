@@ -18,8 +18,10 @@ def call() {
 	
 	env.branch = BRANCH_NAME 
   env.apiVersion = "v1"
-  
-  def content = readFile 'hello-world/src/main/resources/application.properties'
+  File propertiesFile = new File('hello-world/src/main/resources/application.properties')
+def config = new ConfigSlurper().parse(propertiesFile.toURL())
+println(config.service.version)
+  //def content = readFile 'hello-world/src/main/resources/application.properties'
 /*
 Properties properties = new Properties()
 InputStream is = new ByteArrayInputStream(content.getBytes());
