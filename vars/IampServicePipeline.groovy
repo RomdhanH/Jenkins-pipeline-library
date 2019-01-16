@@ -19,23 +19,16 @@ pipeline {
              	initCICD()
             	}
          }
-      stage ('Test') {			
-			when {
-                expression { return branch == "develop" }
-            }
-			steps {
-				timeout(time:30, unit:'MINUTES') {
-					input message: "rollback Test?"
-				}
-				script {
-                                            if (ok == "Promote") {
-                                                    echo 'I only execute on the master branch'
-                                            } else {
-                                                    echo 'I execute elsewhere'
-                                            }
-                                    }
-			}
-		}
+      stage ('Verify'){
+        steps {
+        try {
+            input id: 'Deploy', message: 'Is Blue node fine? Proceed with Green node deployment?', ok: 'Deploy!'
+            do  sh "ls -la"
+        } catch (error) {
+            sh "ls -la"
+        }
+        }
+    }
  
         
     stage ("Checkout & Build") {
