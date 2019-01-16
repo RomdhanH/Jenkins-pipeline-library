@@ -23,7 +23,7 @@ pipeline {
         steps {
         try {
             input id: 'Deploy', message: 'Is Blue node fine? Proceed with Green node deployment?', ok: 'Deploy!'
-            do  sh "ls -la"
+              sh "ls -la"
         } catch (error) {
             sh "ls -la"
         }
