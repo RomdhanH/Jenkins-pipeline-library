@@ -13,13 +13,16 @@ def call() {
         sh "rsync -a * ./$repoName"
 
 env.WORKSPACE = pwd()
-  Properties properties = new Properties()
+/*  Properties properties = new Properties()
 def propertiesFile = readFile "${env.WORKSPACE}/src/main/resources/application.properties"
   propertiesFile.withInputStream {
     properties.load(it)
 }
-  println properties."service.version"
+  println properties."service.version"*/
   
+  File propertiesFile = new File('"${env.WORKSPACE}/src/main/resources/application.properties')
+def config = new ConfigSlurper().parse(propertiesFile.toURL())
+println(config.service.version)
 
 
 
