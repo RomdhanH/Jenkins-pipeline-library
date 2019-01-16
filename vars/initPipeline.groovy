@@ -20,10 +20,15 @@ def propertiesFile = readFile "${env.WORKSPACE}/src/main/resources/application.p
 }
   println properties."service.version"*/
   
-  File propertiesFile = new File('"${env.WORKSPACE}/src/main/resources/application.properties')
+ /* File propertiesFile = new File('${env.WORKSPACE}/src/main/resources/application.properties')
 def config = new ConfigSlurper().parse(propertiesFile.toURL())
-println(config.service.version)
-
+println(config.service.version)*/
+	def properties = new Properties()
+    //both leading / and no / is fine
+    this.getClass().getResource( '${env.WORKSPACE}/src/main/resources/application.properties' ).withInputStream {
+        properties.load(it)
+    }
+  properties."service.name"
 
 
         env.appName = repoName
