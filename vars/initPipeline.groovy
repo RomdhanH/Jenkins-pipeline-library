@@ -30,6 +30,9 @@ println(config.service.version)*/
     }
   properties."service.name"*/
 sh "ls -la ${env.WORKSPACE}/src/main/resources/"
+  def props = readProperties file: '${env.WORKSPACE}/src/main/resources/'
+ def Var1= props['service.version']
+  echo "Var1=${Var1}"
 
         env.appName = repoName
         env.branch = BRANCH_NAME 
