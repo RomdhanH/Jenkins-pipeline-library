@@ -23,13 +23,13 @@ def propertiesFile = readFile "${env.WORKSPACE}/src/main/resources/application.p
  /* File propertiesFile = new File('${env.WORKSPACE}/src/main/resources/application.properties')
 def config = new ConfigSlurper().parse(propertiesFile.toURL())
 println(config.service.version)*/
-	def properties = new Properties()
+/*	def properties = new Properties()
     //both leading / and no / is fine
     this.getClass().getResource( '${env.WORKSPACE}/src/main/resources/application.properties' ).withInputStream {
         properties.load(it)
     }
-  properties."service.name"
-
+  properties."service.name"*/
+sh "ls -la ${env.WORKSPACE}/src/main/resources/"
 
         env.appName = repoName
         env.branch = BRANCH_NAME 
