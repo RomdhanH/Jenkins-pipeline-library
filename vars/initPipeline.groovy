@@ -13,9 +13,9 @@ def call() {
         sh "rsync -a * ./$repoName"
 
 
+		 env.workspace = pwd()
 
-
- 		 def props = readProperties file: '/src/main/resources/application.properties'
+ 		 def props = readProperties file: '${env.workspace}/src/main/resources/application.properties'
  		 def Var1= props['service.version']
          echo "Var1=${Var1}"
 
