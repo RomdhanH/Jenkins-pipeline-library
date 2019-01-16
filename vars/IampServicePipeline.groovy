@@ -19,14 +19,7 @@ pipeline {
              	initCICD()
             	}
          }
-      stage ('Verify'){
-        
-        steps {
-        verifyproddeployment()
-        }
-        
-        
-    }
+      
  
         
     stage ("Checkout & Build") {
@@ -167,6 +160,12 @@ pipeline {
 			
 				switchroute()
             }
+      }
+      stage ('Rollback release'){
+        
+        steps {
+        verifyproddeployment()
+        }
       }
       
       
