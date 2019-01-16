@@ -6,7 +6,8 @@ pipeline {
   
 
 	stages {
-   
+    
+      
       
 		stage("Init Pipeline") {
             steps {
@@ -18,6 +19,23 @@ pipeline {
              	initCICD()
             	}
          }
+      stage ('Test') {			
+			when {
+                expression { return branch == "develop" }
+            }
+			steps {
+				timeout(time:30, unit:'MINUTES') {
+					input message: "rollback Test?"
+				}
+				script {
+                                            if (ok: "Promote") {
+                                                    echo 'I only execute on the master branch'
+                                            } else {
+                                                    echo 'I execute elsewhere'
+                                            }
+                                    }
+			}
+		}
  
         
     stage ("Checkout & Build") {
