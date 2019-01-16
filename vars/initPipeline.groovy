@@ -12,6 +12,7 @@ def call() {
   sh "mkdir $repoName"
   sh "rsync -a * ./$repoName"
   sh "ls -la"
+  sh "pwd"
   sh "ls -la $repoName"
 	env.appName = repoName
 	
