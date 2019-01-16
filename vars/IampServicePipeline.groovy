@@ -164,7 +164,7 @@ pipeline {
       stage ('Rollback release'){
         
         steps {
-        verifyproddeployment()
+        RollbackProdRelease()
         }
       }
       
