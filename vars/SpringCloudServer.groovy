@@ -57,7 +57,7 @@ pipeline{
                  	
 
             when {
-                expression { return branch == "develop" }
+                expression { return branch == "master" }
             }
             steps {
                 dir("${appName}") {
@@ -67,7 +67,7 @@ pipeline{
         }
       stage('Check Config Changes') {
             when {
-                expression { return branch == "develop" }
+                expression { return branch == "master" }
             }
             steps {
                 chechConfigChanges()
@@ -77,7 +77,7 @@ pipeline{
         
       stage("Build Image") {
             when {
-                expression { return branch == "develop" }
+                expression { return branch == "master" }
             }
             steps {
                 buildDockerImage(devProject)
@@ -85,7 +85,7 @@ pipeline{
         }
       stage('Cleanup Dev') {
 			when {
-				expression{ return (branch == "develop" && devChanged.toBoolean()) }
+				expression{ return (branch == "master" && devChanged.toBoolean()) }
 			}
 			steps {
 				cleanConfig(devProject)
@@ -97,7 +97,7 @@ pipeline{
   
       stage("Deploy to Dev") {
             when {
-                expression { return branch == "develop" }
+                expression { return branch == "master" }
             }
             steps {
 				sh "oc process -f cicd/iamp-service-config-dev.yaml -l commit=${cicdCommit} | oc create -f- -n ${devProject} || true"
