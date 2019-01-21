@@ -54,7 +54,8 @@ pipeline{
             }
         }*/
        stage('Push Artifacts') {
-            when {
+         echo '${branch}'
+           when {
                 expression { return branch == "develop" }
             }
             steps {
@@ -64,7 +65,7 @@ pipeline{
             }
         }
       stage('Check Config Changes') {
-            when {
+           when {
                 expression { return branch == "develop" }
             }
             steps {
