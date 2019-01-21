@@ -54,6 +54,7 @@ pipeline{
             }
         }*/
        stage('Push Artifacts') {
+         echo '${branch}'
             when {
                 expression { return branch == "develop" }
             }
