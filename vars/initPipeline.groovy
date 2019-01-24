@@ -4,7 +4,7 @@ def call() {
   
   
         //sh "ls -la"
-		//sh "printenv | sort"
+		sh "printenv | sort"
         env.version = readMavenPom().getVersion()
         env.repoName = readMavenPom().getArtifactId()
         
